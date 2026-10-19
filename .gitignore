@@ -3,3 +3,7 @@
 .RData
 *.Rcheck/
 *.tar.gz
+
+.venv/
+__pycache__/
+.pytest_cache/

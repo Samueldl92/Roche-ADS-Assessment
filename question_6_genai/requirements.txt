@@ -1,0 +1,6 @@
+pandas==3.0.6
+pydantic==2.14.1
+langchain-core==1.6.12
+langchain-openai==1.7.2
+langchain-anthropic==1.7.6
+pytest==9.1.1
