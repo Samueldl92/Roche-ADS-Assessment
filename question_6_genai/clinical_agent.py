@@ -5,15 +5,14 @@ Flow: question -> prompt (schema + question) -> LLM -> structured intent
 
 Two back ends share the same prompt, parser and executor:
 
-* a real chat model through LangChain (OpenAI or Anthropic), picked from
-  environment variables;
+* a real chat model through LangChain (OpenAI), enabled from an environment
+  variable;
 * a deterministic model for use without an API key (tests and demos), wrapped
   as a LangChain runnable so that only the model call itself is swapped.
 
 Environment variables:
-    LLM_PROVIDER     "openai", "anthropic" or "mock". Default: openai if
-                     OPENAI_API_KEY is set, else anthropic if ANTHROPIC_API_KEY
-                     is set, else mock.
+    LLM_PROVIDER     "openai" or "mock". Default: openai if OPENAI_API_KEY is
+                     set, else mock.
     LLM_MODEL        model name for the real back end (provider default if unset).
     AE_CSV_PATH      path to the AE CSV (default ../data/adae.csv).
 """
@@ -180,8 +179,6 @@ def build_chain(provider: Optional[str] = None) -> tuple[Runnable, str]:
     if provider is None:
         if os.environ.get("OPENAI_API_KEY"):
             provider = "openai"
-        elif os.environ.get("ANTHROPIC_API_KEY"):
-            provider = "anthropic"
         else:
             provider = "mock"
 
@@ -190,14 +187,10 @@ def build_chain(provider: Optional[str] = None) -> tuple[Runnable, str]:
         from langchain_openai import ChatOpenAI
 
         llm = ChatOpenAI(model=model_name or "gpt-4o-mini", temperature=0)
-    elif provider == "anthropic":
-        from langchain_anthropic import ChatAnthropic
-
-        llm = ChatAnthropic(model=model_name or "claude-haiku-4-5", temperature=0)
     elif provider == "mock":
         return PROMPT | RunnableLambda(_mock_model), "mock"
     else:
-        raise AgentError(f"Unknown LLM_PROVIDER '{provider}' (use openai, anthropic or mock).")
+        raise AgentError(f"Unknown LLM_PROVIDER '{provider}' (use openai or mock).")
     return PROMPT | llm.with_structured_output(QueryIntent), provider
 
 
@@ -209,7 +202,7 @@ class ClinicalTrialDataAgent:
 
     Args:
         ae: AE dataframe (needs USUBJID plus the columns in SCHEMA that you query).
-        provider: "openai", "anthropic" or "mock". Defaults to the environment.
+        provider: "openai" or "mock". Defaults to the environment.
     """
 
     def __init__(self, ae: pd.DataFrame, provider: Optional[str] = None) -> None:

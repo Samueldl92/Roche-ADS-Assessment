@@ -11,7 +11,6 @@ from clinical_agent import AgentError, ClinicalTrialDataAgent, QueryIntent  # no
 @pytest.fixture()
 def agent(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     monkeypatch.delenv("LLM_PROVIDER", raising=False)
     ae = pd.DataFrame(
         {
@@ -97,7 +96,6 @@ def test_unknown_provider():
 
 def test_real_data_if_available(monkeypatch):
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
-    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     path = Path(__file__).resolve().parents[2] / "data" / "adae.csv"
     if not path.is_file():
         pytest.skip("data/adae.csv not generated yet")

@@ -27,10 +27,9 @@ Chosen from environment variables (keys are never read or stored by this code, L
 | Setting | Backend |
 |---|---|
 | `OPENAI_API_KEY` set | OpenAI (`langchain-openai`, default `gpt-4o-mini`) |
-| `ANTHROPIC_API_KEY` set | Anthropic (`langchain-anthropic`, default `claude-haiku-4-5`) |
 | no key | mock (below) |
 
-`LLM_PROVIDER=openai|anthropic|mock` forces a choice and `LLM_MODEL` sets the model name.
+`LLM_PROVIDER=openai|mock` forces a choice and `LLM_MODEL` sets the model name.
 
 **Mock mode (no key, for tests and demos).** The chain is the same: the prompt is rendered with the schema and the
 question, a runnable stands in for the chat model and returns a `QueryIntent`, and the same executor filters the data.
