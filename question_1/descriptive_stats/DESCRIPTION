@@ -1,0 +1,20 @@
+Package: descriptiveStats
+Title: Basic Descriptive Statistics with Explicit Edge-Case Handling
+Version: 0.1.0
+Authors@R:
+    person("Samuel", "Díaz León", , "samuel92dl@gmail.com", role = c("aut", "cre"))
+Description: Mean, median, mode, first and third quartile, and
+    interquartile range for numeric vectors. Every function validates its
+    input with informative error messages and has documented behaviour for
+    empty vectors, missing values and single values. The mode reports all
+    tied values, and the quartile functions can use either the definition
+    needed to reproduce the assessment example or any of the nine quantile
+    types of base R.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Depends: R (>= 4.2.0)
+Imports: stats
+Suggests: testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.1
