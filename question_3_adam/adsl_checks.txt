@@ -1,0 +1,79 @@
+ADSL records: 306 | variables: 37
+
+AGEGR9 / AGEGR9N:
+# A tibble: 2 × 3
+  AGEGR9  AGEGR9N     n
+  <chr>     <dbl> <int>
+1 18 - 50       2     1
+2 >50           3   305
+
+ITTFL:
+# A tibble: 1 × 2
+  ITTFL     n
+  <chr> <int>
+1 Y       306
+
+ABNSBPFL:
+# A tibble: 2 × 2
+  ABNSBPFL     n
+  <chr>    <int>
+1 N           73
+2 Y          233
+
+CARPOPFL:
+# A tibble: 2 × 2
+  CARPOPFL     n
+  <chr>    <int>
+1 Y           44
+2 <NA>       262
+
+TRTSTMF:
+# A tibble: 2 × 2
+  TRTSTMF     n
+  <chr>   <int>
+1 H         254
+2 <NA>       52
+
+Subjects without TRTSDTM (never received a valid dose): 52
+Subjects without LSTALVDT: 0
+TRTSDTM range: 2012-07-09 to 2014-09-02
+LSTALVDT range: 2012-08-13 to 2015-03-05
+
+Sensitivity: subjects flagged ABNSBPFL = Y
+  any position (as specified): 233 | supine readings only: 213
+
+Sensitivity: ITTFL = Y includes the 'Screen Failure' arm because ARM is populated
+# A tibble: 4 × 3
+  ARM                  ITTFL     n
+  <chr>                <chr> <int>
+1 Placebo              Y        86
+2 Screen Failure       Y        52
+3 Xanomeline High Dose Y        84
+4 Xanomeline Low Dose  Y        84
+
+Head of the derived variables:
+# A tibble: 10 × 11
+   USUBJID       AGE AGEGR9 AGEGR9N TRTSDTM             TRTSTMF
+   <chr>       <dbl> <chr>    <dbl> <dttm>              <chr>  
+ 1 01-701-1015    63 >50          3 2014-01-02 00:00:00 H      
+ 2 01-701-1023    64 >50          3 2012-08-05 00:00:00 H      
+ 3 01-701-1028    71 >50          3 2013-07-19 00:00:00 H      
+ 4 01-701-1033    74 >50          3 2014-03-18 00:00:00 H      
+ 5 01-701-1034    77 >50          3 2014-07-01 00:00:00 H      
+ 6 01-701-1047    85 >50          3 2013-02-12 00:00:00 H      
+ 7 01-701-1057    59 >50          3 NA                  <NA>   
+ 8 01-701-1097    68 >50          3 2014-01-01 00:00:00 H      
+ 9 01-701-1111    81 >50          3 2012-09-07 00:00:00 H      
+10 01-701-1115    84 >50          3 2012-11-30 00:00:00 H      
+   TRTEDTM             ITTFL ABNSBPFL LSTALVDT   CARPOPFL
+   <dttm>              <chr> <chr>    <date>     <chr>   
+ 1 2014-07-02 23:59:59 Y     Y        2014-07-02 <NA>    
+ 2 2012-09-01 23:59:59 Y     Y        2013-02-18 Y       
+ 3 2014-01-14 23:59:59 Y     Y        2014-01-14 <NA>    
+ 4 2014-03-31 23:59:59 Y     Y        2014-09-15 <NA>    
+ 5 2014-12-30 23:59:59 Y     Y        2014-12-30 <NA>    
+ 6 2013-03-09 23:59:59 Y     Y        2013-07-28 Y       
+ 7 NA                  Y     N        2013-12-20 <NA>    
+ 8 2014-07-09 23:59:59 Y     Y        2014-07-09 <NA>    
+ 9 2012-09-16 23:59:59 Y     N        2013-02-22 <NA>    
+10 2013-01-23 23:59:59 Y     Y        2013-05-20 <NA>    
