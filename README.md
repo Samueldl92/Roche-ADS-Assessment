@@ -144,39 +144,12 @@ has no treatment arm, but Q5 filters on `ACTARM`, so `ACTARM` is joined from `dm
 
 ## What I learned
 
-### Q1
+Q1: stating the quartile definition matters more than I expected. Nine are in common use, the statement's own example matched none of them, and the tests against `stats::quantile()` and `stats::median()` were a cheap way to catch mistakes. Roxygen2 with `devtools::check()` also caught documentation drift early.
 
-* Roxygen2 plus `devtools::check()` catches documentation drift early, for example
-  broken cross references and examples that no longer run.
-* Edge cases force explicit decisions: what an empty vector, ties or `NA` should return.
-* Verifying the example in the statement found two inconsistencies, the mean and the quartile definition.
-* Quartiles have nine common definitions, so the one in use must be stated.
-* Tests that compare against `stats::median()` and `stats::quantile()` give a cheap independent oracle.
+Q2: the aCRF annotations are the real specification, and reading them settled the DSTERM, DSDECOD and DSCAT rules. Controlled terminology has gaps ("Randomized"), so those cases need their own mapping. Comparing with the published `ds` dataset exposed a DSSEQ ordering problem I would have missed.
 
-### Q2
+Q3: admiral covers almost every step, so most of the work was picking the right function and arguments. Reading the specification literally showed cases worth documenting (every subject gets `ITTFL = "Y"`, and supine-only readings would change `ABNSBPFL`), and recomputing the flags independently from SDTM was a quick way to trust the derivations.
 
-* `{sdtm.oak}` works by merging many small mappings on `oak_id_vars`, which makes conditional mappings natural.
-* The aCRF annotations are the real specification, and reading them settled the DSTERM, DSDECOD and DSCAT rules.
-* Controlled terminology matching has gaps (for example "Randomized"), so those cases need their own mapping.
-* Comparing against the published `ds` dataset turned up the DSSEQ ordering issue.
-* Date columns changed class between steps, so I convert to character only at the end.
+Q4: `tbl_hierarchical()` handles nested counts with denominators from ADSL, which is where percentages usually go wrong. Rendering the HTML and PNG files and actually looking at them caught label problems the code never showed. Exact binomial intervals are the safer choice for the small counts in the tail of the top 10.
 
-### Q3
-
-* admiral has a function for almost every step, so the work is mostly choosing the right one and its arguments.
-* Imputation flags depend on `ignore_seconds_flag` and `highest_imputation`, and the specification wording maps onto them directly.
-* `derive_vars_extreme_event()` handles "latest date over several domains" with one list of events.
-* Reading the specification literally exposed cases worth documenting: all subjects get `ITTFL = "Y"`, and supine-only would change `ABNSBPFL`.
-* An independent recomputation of the flags is a quick way to trust the derivations.
-
-### Q4
-
-* `tbl_hierarchical()` handles nested counts and denominators from ADSL, which is where the percentages are easy to get wrong.
-* The choice of population (safety set, TEAEs only) changes every number, so it is stated in the table and plots.
-* Exact binomial intervals are the safer choice for small counts.
-* Rendering the HTML and PNG files and looking at them caught header and label problems that the code did not.
-* A listing is a different shape of output, so it gets its own script and sorting rules.
-
-### Q5 and Q6
-
-See `question_5_api/README.md` and `question_6_genai/README.md`.
+Q5 and Q6: see `question_5_api/README.md` and `question_6_genai/README.md`.
