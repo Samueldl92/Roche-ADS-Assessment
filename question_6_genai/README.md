@@ -12,7 +12,7 @@ question -> prompt (schema + question) -> LLM -> {target_column, filter_value} -
 ```bash
 python -m venv .venv
 .venv/Scripts/activate        # Linux/macOS: source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r question_6_genai/requirements.txt
 cd question_6_genai
 python clinical_agent.py      # runs the 3 example queries
 pytest

@@ -7,7 +7,7 @@ API over the adverse event data (`data/adae.csv`, exported from `pharmaversesdtm
 ```bash
 python -m venv .venv
 .venv/Scripts/activate        # Linux/macOS: source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r question_5_api/requirements.txt
 cd question_5_api
 uvicorn main:app --reload
 ```
